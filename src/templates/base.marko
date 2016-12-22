@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            function init(){
+                require(['app'],function(){})
+            }
+        </script>
+        <script src="/scripts/vendor/require.min.js"></script>
+        <script src="/scripts/main.js"></script>
+        
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        
+        <base href="/">
+    </head>
+    <body style="font-family:proxima_nova_rgregular; text-transform: lowercase !important;">
+        <div class="body-container">
+            <div id="content" class="clearfix body-content">
+                <layout-placeholder name="body"/>
+            </div>
+        </div>
+        <script src="/scripts/app.js" onload="init()"></script>
+    </body>
+</html>

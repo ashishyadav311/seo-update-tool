@@ -1,0 +1,151 @@
+<layout-use template="templates/base.marko">
+    <layout-put into="body">
+        <div data-controller="monitoring">
+        	<style>
+        		header{
+        			text-align: center;
+        			position: relative;
+        		}
+        		header .logo{
+        			position: absolute;
+        			top: 10px;
+        			left: 10px;
+        		}
+        		header .heading{
+        			font-size: 24px;
+        			text-align: center;
+        			text-transform: uppercase;
+        			font-weight: normal;
+        			display: inline-block;
+        		}
+        		.select-options{
+        			margin-bottom: 30px;
+        			margin-top: 20px;
+        		}
+        		.max150{
+        			max-width: 150px;
+        		}
+        		.btn {
+        			width: 100%;
+        			text-transform: lowercase;
+        		}
+        	</style>
+
+        	<header> 
+        		<span class="logo"><img src="/images/makaan-logo.png" /></span>
+        		<h2 class="heading">monitoring tools </h2> 
+        	</header>
+        	<div class="select-options clearfix">
+        	<div class="col-sm-3 col-xs-12 max150">
+	        	<div class="dropdown" data-dropdown="url">
+	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+	        	  <span class="caret"></span></button>
+	        	  <ul class="dropdown-menu">
+	        	    <li data-type="url" for="(name,url) in data.urls" data-val="${name}">
+	        	    	<a>${name}</a>
+	        	    </li>
+	        	  </ul>
+	        	</div>
+        	</div>
+        	<div class="col-sm-3 col-xs-12 max150">
+	        	<div class="dropdown" data-dropdown="environment">
+	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Domain</span>
+	        	  <span class="caret"></span></button>
+	        	  <ul class="dropdown-menu">
+	        	    <li data-type="env" data-val="beta">
+	        	    	<a>Beta</a>
+	        	    </li>
+	        	    <li data-type="env" data-val="production">
+	        	    	<a>Production</a>
+	        	    </li>
+	        	  </ul>
+	        	</div>
+        	</div>
+        	<div class="col-sm-3 col-xs-12 max150">
+	        	<div class="dropdown" data-dropdown="limit">
+	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Limit</span>
+	        	  <span class="caret"></span></button>
+	        	  <ul class="dropdown-menu">
+	        	    <li data-type="limit" for="limit in data.limits" data-val="${limit}">
+	        	    	<a>last ${limit} releases </a>
+	        	    </li>
+	        	  </ul>
+	        	</div>
+        	</div>
+
+			<div class="col-sm-3 col-xs-12 max150">
+				<!-- Indicates a successful or positive action -->
+				<button type="button" data-type="getResult" class="btn btn-success">Get Result</button>
+			</div>
+
+		</div>
+
+    		<div data-module="chart">
+
+    			<script type="text/x-config">
+						{	"title": "Load Time Trend",
+							"xAxis":{
+								"type":"category",
+								"title": {
+									"text": "Releases"
+								}
+							},
+							"yAxis" : {
+								"title": {
+									"text": "Time(in seconds)"
+								}
+							},
+							"type":"spline",
+							"extraconfig":{
+								"series":${JSON.stringify(data.series.timeSeries)}
+							}
+						}	
+    			</script>
+    		</div>
+    		<div data-module="chart">
+    			<script type="text/x-config">
+						{
+							"title": "Page Size Trend",
+							"xAxis":{
+								"type":"category",
+								"title": {
+									"text": "Releases"
+								}
+							},
+							"yAxis" : {
+								"title": {
+									"text": "Size(in KB)"
+								}
+							},
+							"type":"spline",
+							"extraconfig":{
+								"series":${JSON.stringify(data.series.sizeSeries)}
+							}
+						}	
+    			</script>
+    		</div>
+    		<div data-module="chart">
+    			<script type="text/x-config">
+						{
+							"title": "Number of Request Trend",
+							"xAxis":{
+								"type":"category",
+								"title": {
+									"text": "Releases"
+								}
+							},
+							"yAxis" : {
+								"title": {
+									"text": "Request"
+								}
+							},
+							"type":"spline",
+							"extraconfig":{
+								"series":${JSON.stringify(data.series.requestSeries)}
+							}
+						}		
+    			</script>
+    		</div>
+        </div>
+    </layout-put>
+</layout-use>

@@ -1,0 +1,8 @@
+{
+  "name": "property-exchange",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "highcharts": "~4.1.8"
+  }
+}

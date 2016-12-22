@@ -1,0 +1,14 @@
+dist/
+node_modules/
+src/public/bower_components/
+src/public/styles/css/
+src/compiled/
+compiled/
+*.log
+*marko.js
+*.DS_Store
+.tmp
+dist/
+log/
+.env*
+*sublime*

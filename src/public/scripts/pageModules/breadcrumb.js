@@ -6,52 +6,61 @@ define([
 ], (sharedConfig) => {
     Box.Application.addModule("breadcrumb", (context) => {
 
-            var CommonService = context.getService('CommonService');
-            var ApiService = context.getService('ApiService');
-            var logger = context.getService('Logger');
-            var messages = [],
-                behaviors = [],
-                moduleEl, config = {};
+        var CommonService = context.getService('CommonService');
+        var ApiService = context.getService('ApiService');
+        var logger = context.getService('Logger');
+        var messages = [],
+            behaviors = [],
+            moduleEl, config = {};
 
-            function _setValues(urlType, limit, domain) {
-                $(moduleEl).find('[data-dropdown="url"] [data-selected]').data('val', urlType).text(urlType);
-            }
+        function _setValues(urlType, limit, domain) {
+            $(moduleEl).find('[data-dropdown="url"] [data-selected]').data('val', urlType).text(urlType);
+        }
 
-            function parser(response) {
-                var parsedData = {};
-                $.each(response, function(k, v) {
-                    if (!parsedData[v.level]) {
-                        parsedData[v.level] = [];
-                    }
-                    parsedData[v.level].push({
-                        id: v.id,
-                        name: v.sub_url_category_id,
-                        order: v.url_order
-                    })
+        function parser(response) {
+            var parsedData = {};
+            $.each(response, function(k, v) {
+                if (!parsedData[v.level]) {
+                    parsedData[v.level] = [];
+                }
+                parsedData[v.level].push({
+                    id: v.id,
+                    name: v.sub_url_category_id,
+                    order: v.url_order
                 })
-                return parsedData;
-            }
+            })
+            return parsedData;
+        }
 
-            function getDetails(id, name) {
-                ApiService.get('/seo/pingback?query=getTemplateById&id=' + id).then(function(response) {
-                        var data = parser(response); 
-                        $('#result').html(createTable(data, name));
-                })
+        function getDetails(id, name) {
+            ApiService.get('/seo/pingback?query=getTemplateById&id=' + id).then(function(response) {
+                var data = parser(response);
+                $('#result').html(createTable(data, name));
+            })
         }
 
         function createTable(data, name) {
-            var str = "<table><tbody>";
-                str += "<tr><td colspan='4'>"+name+"</td></tr>"
 
+            var str;
             $.each(data, function(k, v) {
-                str += "<tr><td>"+k+"</td>"
-                $.each(v, function(key, val) {
-                    str += "<tr><td>"+val.id+"</td><td>"+val.name+"</td><td>"+val.order+"</td></tr>"
-                });
-                str += "</tr>"
-
+                if (v) {
+                    str += "<table><tbody>";
+                    str += "<tr><th colspan='4'>" + name + "</th></tr>"
+                    str += "<tr colspan=" + v.length + ">";
+                    str += "<td>"
+                    str += "<table><tbody><th>Level</th><tr><td>" + k + "</td></tr></tbody></table>";
+                    str += "</td>";
+                    str += "<td>";
+                    str += "<table><tbody><th>id</th><th>name</th><th>order</th>"
+                    $.each(v, function(key, val) {
+                        str += "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.order + "</td></tr>"
+                    });
+                    str += "</tbody></table>";
+                    str += "</td>";
+                    str += "</tr><tr></tr>";
+                    str += "</tbody></table>";
+                }
             })
-            str += "</tbody></table>";
             return str;
         }
 

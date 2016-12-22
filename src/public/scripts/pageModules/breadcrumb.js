@@ -3,7 +3,7 @@ define([
     'common/sharedConfig',
     'services/commonService'
 ], (sharedConfig) => {
-    Box.Application.addModule("monitoring", (context) => {
+    Box.Application.addModule("breadcrumb", (context) => {
 
         const CommonService = context.getService('CommonService'),
             logger = context.getService('Logger');

@@ -4,8 +4,7 @@ define('app', ['infra'], function() {
         'common/sharedConfig',
         'services/commonService',
         'services/utils',
-        'modules/chart/scripts/index',
-        'scripts/pageModules/monitoring'
+        'scripts/pageModules/breadcrumb'
     ], function(SharedConfig) {
         const Application = Box.Application,
             CommonService = Application.getService('CommonService'),

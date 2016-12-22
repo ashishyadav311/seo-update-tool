@@ -31,6 +31,14 @@
                         url: '/seo/pingback',
                         route: '/seo/pingback'
                     }
+                },
+                breadcrumb: function(){
+                    return{
+                        controller: 'breadcrumb',
+                        method: ['GET'],
+                        url: '/seo/breadcrumb',
+                        route: '/seo/breadcrumb'
+                    }
                 }
         },
         testingUrls: {

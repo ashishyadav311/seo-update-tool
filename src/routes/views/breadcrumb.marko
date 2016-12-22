@@ -1,0 +1,60 @@
+<layout-use template="templates/base.marko">
+    <layout-put into="body">
+        <div data-controller="breadcrumb">
+        	<style>
+        		header{
+        			text-align: center;
+        			position: relative;
+        		}
+        		header .logo{
+        			position: absolute;
+        			top: 10px;
+        			left: 10px;
+        		}
+        		header .heading{
+        			font-size: 24px;
+        			text-align: center;
+        			text-transform: uppercase;
+        			font-weight: normal;
+        			display: inline-block;
+        		}
+        		.select-options{
+        			margin-bottom: 30px;
+        			margin-top: 20px;
+        		}
+        		.max150{
+        			max-width: 150px;
+        		}
+        		.btn {
+        			width: 100%;
+        			text-transform: lowercase;
+        		}
+                .dropdown ul{
+                    max-height: 300px;
+                    overflow-y: scroll;
+                }
+        	</style>
+
+        	<header> 
+        		<span class="logo"><img src="/images/makaan-logo.png" /></span>
+        		<h2 class="heading">Seo Breadcrumb Update tool </h2> 
+        	</header>
+        	<div class="select-options clearfix">
+        	<div class="col-sm-3 col-xs-12 max150">
+	        	<div class="dropdown" data-dropdown="url">
+	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+	        	  <span class="caret"></span></button>
+	        	  <ul class="dropdown-menu">
+	        	    <li data-type="url" for="template in data.templates" data-val="${template.id}">
+	        	    	<a>${template.name}</a>
+	        	    </li>
+	        	  </ul>
+	        	</div>
+        	</div>
+			<div class="col-sm-3 col-xs-12 max150">
+				<!-- Indicates a successful or positive action -->
+				<button type="button" data-type="getResult" class="btn btn-success">Get Result</button>
+			</div>
+		</div>
+    </layout-put>
+</layout-use>

@@ -14,6 +14,20 @@ function getAllTemplateIds() {
     });
 }
 
+function getAllMapping(id) {
+    var query = 'select * from url_category_breadcrum_mapping where url_category_id = ?;'
+    return new Promise(function(resolve, reject) {
+        db.executeQuery(query, [id], function(error, result) {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
 module.exports = {
-    getAllTemplateIds: getAllTemplateIds
+    getAllTemplateIds: getAllTemplateIds,
+    getAllMapping: getAllMapping
 }

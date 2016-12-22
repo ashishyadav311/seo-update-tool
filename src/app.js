@@ -44,7 +44,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 app.locals.environment = app.get('env'); //environment setting
-
+ 
+require('services/pingbackService').getAllTemplateIds();
 // Routing
 routeService.setup(app, router); // handles all routing related logic
 

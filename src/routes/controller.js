@@ -3,17 +3,18 @@
 /*
 Description: This registers routes for all api wrappers and assigns respective handlers
 */
-
+const logger = require('services/logger');
 const routeHandlers = require('public/scripts/common/sharedConfig').apiHandlers;
 module.exports.setup = function(router) {
     for (let route in routeHandlers) {
-
         let _routeHandler = routeHandlers[route]();
         var parser = require('./routeHandlers/' + _routeHandler.controller);
         if (parser) {
             let methods = _routeHandler.method;
             for (let i = 0; i < methods.length; i++) {
                 let httpVerb = methods[i];
+        console.log('@@@@@@@',httpVerb);
+
                 let parserRouter = router.route(_routeHandler.route);
                 if (httpVerb === 'GET') {
                     parserRouter.get(parser.routeHandler);

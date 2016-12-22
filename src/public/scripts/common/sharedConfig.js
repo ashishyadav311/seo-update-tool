@@ -41,24 +41,6 @@
                     }
                 }
         },
-        testingUrls: {
-            "Homepage"          : "/",
-            "City Serp"         : "/bangalore-residential-property/buy-property-in-bangalore-city",
-            "Locality Serp"     : "/bangalore-property/hebbal-flats-for-sale-50175",
-            "Locality Overview" : "/bangalore/hebbal-real-estate-50175",
-            "City Overview"     : "/real-estate-bangalore-property",
-            "Project Overview"  : "/bangalore/skylark-ithaca-in-kr-puram-642535"
-        },
-        default:{
-            urlType: "HomePage",
-            limit: "10",
-            domain: "beta"
-        },
-        testingLimits: [10,20,50,100,250,500],
-        domain: {
-            "beta": "http://beta.makaan-ws.com",
-            "production": "http://www.makaan.com"
-        },
         getURL: getURL
             
     };

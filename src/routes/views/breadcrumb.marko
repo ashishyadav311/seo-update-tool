@@ -47,6 +47,56 @@
         		<span class="logo"><img src="/images/makaan-logo.png" /></span>
         		<h2 class="heading">Seo Breadcrumb Update tool </h2> 
         	</header>
+            <div id="par" class="clearfix" style="text-align: center;width: 450px;margin: 0 auto;">
+                <div class="col-sm-3 col-xs-12 max150">
+                    <div class="dropdown" data-dropdown="url">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+                      <span class="val1"></span></button>
+                      <ul class="dropdown-menu">
+                        <li data-type="val1" for="template in data.templates" data-val="${template.id}">
+                            <a> ${template.id} ${template.name}</a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-12 max150">
+                    <div class="dropdown" data-dropdown="url">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+                      <span class="val2"></span></button>
+                      <ul class="dropdown-menu">
+                        <li data-type="val2" for="template in data.templates" data-val="${template.id}">
+                            <a>${template.id} ${template.name}</a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-12 max150">
+                    <div class="dropdown" data-dropdown="url">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select level</span>
+                      <span class="val3"></span></button>
+                      <ul class="dropdown-menu">
+                        <li data-type="level"><a>0</a></li>
+                        <li data-type="level"><a>1</a></li>
+                        <li data-type="level"><a>2</a></li>
+                        <li data-type="level"><a>3</a></li>
+                        <li data-type="level"><a>4</a></li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-12 max150">
+                    <div class="dropdown" data-dropdown="url">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li data-type="insert"><a>insert</a></li>
+                        <li data-type="change"><a>change level</a></li>
+                        <!-- <li data-type="order"><a>change order</a></li> -->
+                        <li data-type="delete"><a>delete</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+
         	<div class="select-options clearfix">
         	<div class="col-sm-3 col-xs-12 max150">
 	        	<div class="dropdown" data-dropdown="url">

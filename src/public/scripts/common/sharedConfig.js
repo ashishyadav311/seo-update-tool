@@ -28,16 +28,8 @@
                     return{
                         controller: 'pingback',
                         method: ['GET'],
-                        url: '/wmt/pingback',
-                        route: '/wpt/pingback'
-                    }
-                },
-                health: function(){
-                    return{
-                        controller: 'health',
-                        method: ['GET'],
-                        url: '/wmt/health',
-                        route: '/wpt/health'
+                        url: '/seo/pingback',
+                        route: '/seo/pingback'
                     }
                 }
         },

@@ -50,9 +50,11 @@
     "moment": "^2.10.6",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.8",
+    "mysql": "^2.12.0",
     "node-cmd": "^1.1.1",
     "promise": "^5.0.0",
-    "request": "^2.64.0"
+    "request": "^2.64.0",
+    "winston": "^2.3.0"
   },
   "engines": {
     "node": ">=0.10.0"

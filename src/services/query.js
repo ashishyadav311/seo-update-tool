@@ -1,7 +1,7 @@
 var db = require('./db');
 
 function getAllTemplateIds() {
-    var query = 'Select id ,name  FROM url_categories;'
+    var query = 'Select id ,name  FROM url_categories where domain_id=1 and status != "InActive";'
     return new Promise(function(resolve, reject) {
         db.executeQuery(query, '', function(error, result) {
             if (error) {

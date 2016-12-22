@@ -1,44 +1,63 @@
 "use strict";
 define([
     'common/sharedConfig',
-    'services/commonService'
+    'services/commonService',
+    'services/apiService',
 ], (sharedConfig) => {
     Box.Application.addModule("breadcrumb", (context) => {
 
-        const CommonService = context.getService('CommonService'),
-            logger = context.getService('Logger');
-        var messages = [],
-            behaviors = [],
-            moduleEl;
+            var CommonService = context.getService('CommonService');
+            var ApiService = context.getService('ApiService');
+            var logger = context.getService('Logger');
+            var messages = [],
+                behaviors = [],
+                moduleEl, config = {};
 
-        function _setValues(urlType, limit, domain){
-            $(moduleEl).find('[data-dropdown="url"] [data-selected]').data('val',urlType).text(urlType);
-            $(moduleEl).find('[data-dropdown="limit"] [data-selected]').data('val', limit).text('last '+limit+' releases');
-            $(moduleEl).find('[data-dropdown="environment"] [data-selected]').data('val', domain).text(domain);
+            function _setValues(urlType, limit, domain) {
+                $(moduleEl).find('[data-dropdown="url"] [data-selected]').data('val', urlType).text(urlType);
+            }
+
+            function parser(response) {
+                var parsedData = {};
+                $.each(response, function(k, v) {
+                    if (!parsedData[v.level]) {
+                        parsedData[v.level] = [];
+                    }
+                    parsedData[v.level].push({
+                        id: v.id,
+                        name: v.sub_url_category_id,
+                        order: v.url_order
+                    })
+                })
+                return parsedData;
+            }
+
+            function getDetails(id, name) {
+                ApiService.get('/seo/pingback?query=getTemplateById&id=' + id).then(function(response) {
+                        var data = parser(response); 
+                        $('#result').html(createTable(data, name));
+                })
         }
 
-        function getJsonFromUrl() {
-            var query = location.search.substr(1);
-            var result = {};
-            query.split("&").forEach(function(part) {
-                var item = part.split("=");
-                result[item[0]] = decodeURIComponent(item[1]);
-            });
-            return result;
+        function createTable(data, name) {
+            var str = "<table><tbody>";
+                str += "<tr><td colspan='4'>"+name+"</td></tr>"
+
+            $.each(data, function(k, v) {
+                str += "<tr><td>"+k+"</td>"
+                $.each(v, function(key, val) {
+                    str += "<tr><td>"+val.id+"</td><td>"+val.name+"</td><td>"+val.order+"</td></tr>"
+                });
+                str += "</tr>"
+
+            })
+            str += "</tbody></table>";
+            return str;
         }
+
+
         function init() {
             moduleEl = context.getElement();
-            let query = getJsonFromUrl();
-            let urlType = (sharedConfig.testingUrls[query.urlType] && query.urlType)  || sharedConfig.default.urlType;
-            let limit = query.count || sharedConfig.default.limit;
-            let domain = (sharedConfig.domain[query.env] && query.env) || sharedConfig.default.domain;
-
-            try{
-                limit  = parseInt(limit);
-            }catch(e){
-                limit  = sharedConfig.default.limit;
-            }
-            _setValues(urlType,limit,domain);
         }
 
         function destroy() {
@@ -52,20 +71,14 @@ define([
 
         function onclick(event, element, elementType) {
             // bind custom messages/events
-            switch(elementType){
-                case "url":
-                case "limit":
-                case "env":
-                    let selectedEl = $(element).parents('[data-dropdown]').find('[data-selected]');
-                    selectedEl.data('val', $(element).data('val')).text($(element).text());
-                break;
+            switch (elementType) {
                 case "getResult":
-                    let testUrl = $(moduleEl).find('[data-dropdown="url"] [data-selected]').data('val');
-                    let limit = $(moduleEl).find('[data-dropdown="limit"] [data-selected]').data('val');
-                    let env = $(moduleEl).find('[data-dropdown="environment"] [data-selected]').data('val');
-                    let url  = window.location.origin+ window.location.pathname + '?' + 'urlType='+testUrl +'&count=' + limit +'&env=' +env;
-                    window.location.href = url;
-                break;
+                case "url":
+                    let id = $(element).data().val;
+                    let name = $(element).text();
+                    getDetails(id, name);
+
+                    break;
             }
         }
 

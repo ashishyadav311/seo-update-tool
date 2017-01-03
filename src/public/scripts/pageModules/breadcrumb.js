@@ -24,8 +24,8 @@ define([
                     parsedData[v.level] = [];
                 }
                 parsedData[v.level].push({
-                    id: v.id,
-                    name: v.sub_url_category_id,
+                    id: v.sub_url_category_id,
+                    name: v.sub_url_category_name,
                     order: v.url_order
                 })
             })
@@ -40,18 +40,27 @@ define([
         }
 
         function createTable(data, name) {
-            var str = "<table><tbody>";
-            str += "<tr><td colspan='4'>" + name + "</td></tr>"
 
+            var str;
             $.each(data, function(k, v) {
-                str += "<tr><td>" + k + "</td>"
-                $.each(v, function(key, val) {
-                    str += "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.order + "</td></tr>"
-                });
-                str += "</tr>"
-
+                if (v) {
+                    str += "<table><tbody>";
+                    str += "<tr><th colspan='4'>" + name + "</th></tr>"
+                    str += "<tr colspan=" + v.length + ">";
+                    str += "<td>"
+                    str += "<table><tbody><th>Level</th><tr><td>" + k + "</td></tr></tbody></table>";
+                    str += "</td>";
+                    str += "<td>";
+                    str += "<table><tbody><th>id</th><th>name</th><th>order</th>"
+                    $.each(v, function(key, val) {
+                        str += "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.order + "</td></tr>"
+                    });
+                    str += "</tbody></table>";
+                    str += "</td>";
+                    str += "</tr><tr></tr>";
+                    str += "</tbody></table>";
+                }
             })
-            str += "</tbody></table>";
             return str;
         }
 
@@ -73,6 +82,7 @@ define([
             var url_category_id = $(element).parents('#par').find('.val1').text();
             var sub_url_category_id = $(element).parents('#par').find('.val2').text();
             var level = $(element).parents('#par').find('.val3').text();
+            var order = $(element).parents('#par').find('.val4').text();
             // bind custom messages/events
             switch (elementType) {
                 case "getResult":
@@ -90,6 +100,9 @@ define([
                 case 'level':
                     $(element).parents('.dropdown').find('.val3').html($(element).text());
                     break;
+                case 'orderval':
+                    $(element).parents('.dropdown').find('.val4').html($(element).text());
+                    break;
                 case "insert":
                     console.log("insert into url_category_breadcrum_mapping set url_category_id =" + url_category_id + " , sub_url_category_id =" + sub_url_category_id + " , level =" + level + " , url_order = 10, is_active = 1");
                     break;
@@ -97,7 +110,7 @@ define([
                     console.log("update url_category_breadcrum_mapping set level=" + level + " where url_category_id =" + url_category_id + " and sub_url_category_id =" + sub_url_category_id);
                     break;
                 case "order":
-                    console.log("update url_category_breadcrum_mapping set url_order= where url_category_id =" + url_category_id + " and sub_url_category_id =" + sub_url_category_id)
+                    console.log("update url_category_breadcrum_mapping set url_order= " + order + " where url_category_id =" + url_category_id + " and sub_url_category_id =" + sub_url_category_id)
                     break;
                 case "delete":
                     console.log("delete from url_category_breadcrum_mapping where url_category_id =" + url_category_id + " and sub_url_category_id =" + sub_url_category_id);

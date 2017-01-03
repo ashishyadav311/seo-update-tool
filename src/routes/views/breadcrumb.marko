@@ -34,12 +34,16 @@
                     overflow-y: scroll;
                 }
                 td{
-                    border: 1px solid;
-                    width:30%;
+                    width:200px;
+                }
+                td,th{
+                    text-align: center;
                 }
                 tr{
-                    height: 20px
+                    border-bottom: 1px dashed;
+                    height: 30px;
                 }
+                
 
         	</style>
 
@@ -47,7 +51,7 @@
         		<span class="logo"><img src="/images/makaan-logo.png" /></span>
         		<h2 class="heading">Seo Breadcrumb Update tool </h2> 
         	</header>
-            <div id="par" class="clearfix" style="text-align: center;width: 450px;margin: 0 auto;">
+            <div id="par" class="clearfix" style="text-align: center;">
                 <div class="col-sm-3 col-xs-12 max150">
                     <div class="dropdown" data-dropdown="url">
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
@@ -85,12 +89,25 @@
                 </div>
                 <div class="col-sm-3 col-xs-12 max150">
                     <div class="dropdown" data-dropdown="url">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select order</span>
+                      <span class="val4"></span></button>
+                      <ul class="dropdown-menu">
+                        <li data-type="orderval"><a>1</a></li>
+                        <li data-type="orderval"><a>10</a></li>
+                        <li data-type="orderval"><a>2</a></li>
+                        <li data-type="orderval"><a>3</a></li>
+                        <li data-type="orderval"><a>4</a></li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-12 max150">
+                    <div class="dropdown" data-dropdown="url">
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
                       <span class="caret"></span></button>
                       <ul class="dropdown-menu">
                         <li data-type="insert"><a>insert</a></li>
                         <li data-type="change"><a>change level</a></li>
-                        <!-- <li data-type="order"><a>change order</a></li> -->
+                        <li data-type="order"><a>change order</a></li>
                         <li data-type="delete"><a>delete</a></li>
                       </ul>
                     </div>
@@ -98,23 +115,19 @@
             </div>
 
         	<div class="select-options clearfix">
-        	<div class="col-sm-3 col-xs-12 max150">
-	        	<div class="dropdown" data-dropdown="url">
-	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
-	        	  <span class="caret"></span></button>
-	        	  <ul class="dropdown-menu">
-	        	    <li data-type="url" for="template in data.templates" data-val="${template.id}">
-	        	    	<a>${template.name}</a>
-	        	    </li>
-	        	  </ul>
-	        	</div>
-        	</div>
-			<div class="col-sm-3 col-xs-12 max150">
-				<!-- Indicates a successful or positive action -->
-				<button type="button" data-type="getResult" class="btn btn-success">Get Result</button>
-			</div>
+            	<div class="col-sm-3 col-xs-12 max150">
+    	        	<div class="dropdown" data-dropdown="url">
+    	        	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span data-selected>Select Url</span>
+    	        	  <span class="caret"></span></button>
+    	        	  <ul class="dropdown-menu">
+    	        	    <li data-type="url" for="template in data.templates" data-val="${template.id}">
+    	        	    	<a>${template.id}  ${template.name}</a>
+    	        	    </li>
+    	        	  </ul>
+    	        	</div>
+            	</div>
+    		</div>
             <div id="result"></div>
 
-		</div>
     </layout-put>
 </layout-use>

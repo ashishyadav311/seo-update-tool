@@ -23,7 +23,8 @@ function getBreadcrumbMapping(queryObj) {
             if (Object.keys(config.templatesMapping).length !== 0) {
                 for (var i in response) {
                     response[i]["url_category_id"] = config.templatesMapping[response[i]["url_category_id"]];
-                    response[i]["sub_url_category_id"] = config.templatesMapping[response[i]["sub_url_category_id"]];
+                    response[i]["sub_url_category_name"] = config.templatesMapping[response[i]["sub_url_category_id"]];
+                    response[i]["sub_url_category_id"] = response[i]["sub_url_category_id"];
                 }
             }
             return response;
